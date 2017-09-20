@@ -157,6 +157,7 @@ sidebar:
   #  - hide    expand only when click on the sidebar toggle icon.
   #  - remove  Totally remove sidebar including sidebar toggle.
   #display: post
+  #侧边栏总是打开
   display: always
   #display: hide
   #display: remove
@@ -190,8 +191,9 @@ excerpt_description: true
 
 # Automatically Excerpt. Not recommend.
 # Please use <!-- more --> in the post to control excerpt accurately.
+#首页是否预览
 auto_excerpt:
-  enable: false
+  enable: true
   length: 150
 
 # Post meta display settings
@@ -344,7 +346,8 @@ changyan:
 
 # Support for LiveRe comments system.
 # You can get your uid from https://livere.com/insight/myCode (General web site)
-#livere_uid: your uid
+#第三方评论 来必力
+livere_uid: MTAyMC8zMDk2OC83NTE3
 
 # Baidu Share
 # Available value:

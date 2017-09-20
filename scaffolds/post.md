@@ -4,5 +4,4 @@ date: {{ date }}
 tags:
 copyright:
 top:
-password:
 ---
