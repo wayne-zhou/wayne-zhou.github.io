@@ -428,8 +428,8 @@ rating:
 # You can visit https://leancloud.cn get AppID and AppKey.
 leancloud_visitors:
   enable: true
-  app_id: #<app_id>
-  app_key: #<app_key>
+  app_id: uA5d39Ybs35yp9DXQxMCnr3i-gzGzoHsz
+  app_key: eeo5xK9kTTG7zIQIHp7A0nXx
 
 # Show PV/UV of the website/page with busuanzi.
 # Get more information on http://ibruce.info/2015/04/04/busuanzi/
@@ -490,7 +490,7 @@ algolia_search:
 # Local search
 # Dependencies: https://github.com/flashlab/hexo-generator-search
 local_search:
-  enable: false
+  enable: true
   # if auto, trigger search by changing input
   # if manual, trigger search by pressing enter key or search button
   trigger: auto
