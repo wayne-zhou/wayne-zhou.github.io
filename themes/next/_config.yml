@@ -14,7 +14,7 @@ keywords: "Hexo, NexT"
 rss:
 
 # Specify the date when the site was setup
-#since: 2015
+since: 2017
 
 # icon between year and author @Footer
 authoricon: heart
@@ -96,7 +96,7 @@ scheme: Mist
 social:
   #LinkLabel: Link
   GitHub: https://github.com/wayne-zhou
-  微博: https://weibo.com/u/1870461284/home?leftnav=1
+  微博: https://weibo.com/u/1870461284
 
 # Social Links Icons
 # Icon Mapping:
