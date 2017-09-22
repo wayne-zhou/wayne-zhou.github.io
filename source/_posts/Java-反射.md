@@ -2,7 +2,7 @@
 title: Java 反射
 date: 2017-09-21 16:16:30
 categories: Java
-tags: Java 反射
+tags: [Java,反射]
 copyright: true
 top: 2
 ---

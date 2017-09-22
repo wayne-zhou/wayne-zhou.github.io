@@ -367,6 +367,10 @@ jiathis: true
 # Share
 #duoshuo_share: true
 
+# Share
+#sharesdk: true
+#shareSDKappkey: 213490ee0d791
+
 # Google Webmaster tools verification setting
 # See: https://www.google.com/webmasters/
 #google_site_verification:
