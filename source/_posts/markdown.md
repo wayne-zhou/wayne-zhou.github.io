@@ -57,6 +57,10 @@ top: 3
 ## 直接连接
 <http://baidu.com>
 
+```
+<http://baidu.com>
+```
+
 ## 超链接
 [百度](http://baidu.com)
 
@@ -91,7 +95,7 @@ top: 3
 | 默认2    | 左对齐2 | 右对齐2 | 居中2 |
 ```
 
-## 参考连接
+## 参考文章
 <http://www.appinn.com/markdown/#html>
 
 
