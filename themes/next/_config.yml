@@ -222,9 +222,9 @@ post_wordcount:
   #description: 欢迎您扫一扫上面的微信公众号，订阅我的博客！
 
 # Reward 开启打赏功能
-#reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！
-#wechatpay: /images/wechatpay.jpg
-#alipay: /images/alipay.jpg
+reward_comment: Enjoy it ? Donate me !  欣赏此文？求鼓励，求支持！
+wechatpay: http://owmgw53q0.bkt.clouddn.com/iimage/gitPages/wayne-wechatpay.jpg
+alipay: http://owmgw53q0.bkt.clouddn.com/iimage/gitPages/wayne-alipay.jpg
 #bitcoin: /images/bitcoin.png
 
 # Declare license on posts
