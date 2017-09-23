@@ -258,7 +258,7 @@ custom_logo:
 #    normal | night | night eighties | night blue | night bright
 # https://github.com/chriskempson/tomorrow-theme
 # 代码高亮主题
-highlight_theme: night bright
+highlight_theme: night
 
 
 # ---------------------------------------------------------------
