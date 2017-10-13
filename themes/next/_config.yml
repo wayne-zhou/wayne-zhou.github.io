@@ -93,6 +93,7 @@ scheme: Mist
 # Social Links
 # Key is the link label showing to end users.
 # Value is the target link (E.g. GitHub: https://github.com/iissnan)
+# 侧边栏社交链接
 social:
   #LinkLabel: Link
   GitHub: https://github.com/wayne-zhou
@@ -121,7 +122,7 @@ social_icons:
   StackOverflow: stack-overflow
   微博: weibo
 
-# Blog rolls
+# Blog rolls 友情链接
 #links_title: Links
 #links_layout: block
 #links_layout: inline
@@ -214,16 +215,16 @@ post_wordcount:
   min2read: true
   separated_meta: true
 
-# Wechat Subscriber
+# Wechat Subscriber  订阅微信公众号
 #wechat_subscriber:
   #enabled: true
-  #qcode: /path/to/your/wechatqcode ex. /uploads/wechat-qcode.jpg
-  #description: ex. subscribe to my blog by scanning my public wechat account
+  #qcode: /uploads/wechat-qcode.jpg
+  #description: 欢迎您扫一扫上面的微信公众号，订阅我的博客！
 
-# Reward
-#reward_comment: Donate comment here
-#wechatpay: /images/wechatpay.jpg
-#alipay: /images/alipay.jpg
+# Reward 开启打赏功能
+reward_comment: Enjoy it ? Donate me !  欣赏此文？求鼓励，求支持！
+wechatpay: http://owmgw53q0.bkt.clouddn.com/iimage/gitPages/wayne-wechatpay.jpg
+alipay: http://owmgw53q0.bkt.clouddn.com/iimage/gitPages/wayne-alipay.jpg
 #bitcoin: /images/bitcoin.png
 
 # Declare license on posts
@@ -256,7 +257,8 @@ custom_logo:
 # Available value:
 #    normal | night | night eighties | night blue | night bright
 # https://github.com/chriskempson/tomorrow-theme
-highlight_theme: normal
+# 代码高亮主题
+highlight_theme: night
 
 
 # ---------------------------------------------------------------
@@ -548,7 +550,7 @@ tabs:
 #! UNLESS YOU KNOW WHAT YOU ARE DOING
 #! ---------------------------------------------------------------
 
-# Motion
+# Motion 开启动画效果
 use_motion: true
 
 # Fancybox
@@ -574,6 +576,7 @@ pace: false
 # pace_theme: pace-theme-center-simple
 pace_theme: pace-theme-minimal
 
+# 2种背景动画效果canvas_nest、three_waves
 # Canvas-nest
 canvas_nest: true
 
