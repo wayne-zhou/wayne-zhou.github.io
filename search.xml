@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[mongoDB语法笔记]]></title>
+    <url>%2F2017%2F12%2F08%2FmongoDB%2F</url>
+    <content type="text"><![CDATA[启动1234#进入mongoDB下的bin文件, 可加参数 --port 20000 --auth auth表示开始鉴权mongod.exe --dbpath "F:\ProgramFiles2\mongoDB\db"执行mongo.exe 创建db12345678#创建名为mydb的数据库，如果该数据库存在，则切换到这个数据库use mydb#检查当前选定的数据库db#检查数据库列表，空的数据库不显示show dbs删除当前所在的数据库db.dropDatabase() 创建用户123456789101112131415#查看用户,在admin库db.system.users.find()#创建用户,admin库创建root用户db.createUser(&#123;user:"root",pwd:"123456",roles:["userAdminAnyDatabase"]&#125;)#登录root用户db.auth("root","123456") #创建可执行js的角色：db.createRole(&#123;role:'sysadmin',roles:[],privileges:[&#123;resource:&#123;anyResource:true&#125;,actions:['anyAction']&#125;]&#125;) #其它库创建用户，首先以用户管理员的身份登录 admin 数据库。然后用 use 命令切换到目标数据库，同样用 db.createUser() 命令来创建用户，其中角色名为 read 和 readWrite#testy用户追加权限执行js权限db.grantRolesToUser("test", [&#123;role:"sysadmin", db:"admin"&#125;] )#更新权限db.updateUser()#删除权限db.revokeRolesFromUser() 创建集合123456#创建一个movie的集合db.createCollection('movie')#查看当前库的集合db.getCollectionNames()#删除movie的集合db.movie.drop() 新增1234#movie的集合中插入一条数据db.movie.insert(&#123;&#125;)#movie的集合中插入多条数据db.movie.insert([&#123;&#125;,&#123;&#125;]) 查询1234567891011121314#查询movie的集合，pretty()输出的是格式化后的db.movie.find().pretty()##根据key1和key2的条件过滤, &amp;&amp;关系db.movie.find(&#123;key1:'value1', key2:'value2'&#125;).pretty()#根据key1或key2的条件过滤,||的关系过滤db.movie.find(&#123;$or:[&#123;key1:'value1'&#125;,&#123;key1:'value2'&#125;]&#125;).pretty()#条件key1大于numdb.movie.find(&#123;key1:&#123;$gt:num&#125;&#125;).pretty() #$lt小于,$get大于等于,$let小于等于#按磁盘存储顺序返回第一个db.movie.findOne(&#123;key1:'value1'&#125;)#skip表示从第几(0)个开始,limit输出几个 db.movie.find().skip(1).limit(2).pretty()#第一个是过滤参数，第二个表示返回字段，1表示要返回，而0则表示不返回，默认0db.movie.find(&#123;key1:'value'&#125;,&#123;'key1':1,'key2':1&#125;).pretty() 更新12345678#key1条件，key2更新字段,默认更新第一个。key2不存在时新增key2字段db.movie.update(&#123;key1:'value1'&#125;, &#123;$set:&#123;key2:value2&#125;&#125;)#key2自增加num,多记录默认更新第一个db.movie.update(&#123;key1:'value1'&#125;, &#123;$inc:&#123;key2:num&#125;&#125;)#符合条件的都更新db.movie.update(&#123;&#125;, &#123;$inc:&#123;key2:num&#125;&#125;,&#123;multi:true&#125;)#符合key1条件的记录中key2的值追加value2db.movie.update(&#123;key1:'value1'&#125;, &#123;$push:&#123;key2:'value2'&#125;&#125;) 删除123456#删除movie集合db.movie.remove()#删除符合key1条件的所有记录db.movie.remove(&#123;key1:'value1'&#125;)#删除符合key1条件的第一条记录db.movie.remove(&#123;key1:'value1'&#125;,1) 索引和排序123456789101112#key1加上升序索引,-1为降序db.movie.ensureIndex(&#123;key1:1&#125;)#key1加上text索引，用于文本搜索db.movie.ensureIndex(&#123;key1:'text'&#125;)#过滤文本中含有aaa的db.movie.find(&#123;$text:&#123;$search:"aaa"&#125;&#125;).pretty()#返回movie的所有索引db.movie.getIndexes()#删除key1的索引db.movie.dropIndex('key1')#按照key1升序，-1为降序db.movie.find().sort(&#123;'key1':1&#125;).pretty() 聚合12#按照key1分组后求和key2。$avg、$first、$last、$max、$mindb.movie.aggregate([&#123;$group:&#123;name1:'$key1',num2:&#123;$sum:'$key2'&#125;&#125;&#125;]) 正则表达式1234#过滤key1中含有b的，区分大小写db.movie.find(&#123;key1:&#123;$regex:'.*b'&#125;&#125;).pretty()#不区分大小写db.movie.find(&#123;key1:&#123;$regex:'.*b$',$options:'$i'&#125;&#125;).pretty()]]></content>
+      <categories>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>mongo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[java-IO流]]></title>
+    <url>%2F2017%2F10%2F04%2Fjava-IO%E6%B5%81%2F</url>
+    <content type="text"><![CDATA[java-字节流、字符流 Java对BIO、NIO、AIO的支持Java BIO同步并阻塞，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，当然可以通过线程池机制改善，jdk1.4之前只有该模式。 Java NIO同步非阻塞，服务器实现模式为一个请求一个线程，即客户端发送的连接请求都会注册到多路复用器上，多路复用器轮询到连接有I/O请求时才启动一个线程进行处理。Channels 、Buffers、Selectors Java AIO(NIO.2) 异步非阻塞，服务器实现模式为一个有效请求一个线程，客户端的I/O请求都是由OS先完成了再通知服务器应用去启动线程进行处理。进行读写操作时，只须直接调用API的read或write方法即可，read/write方法都是异步的，完成后会主动调用回调函数。 在JDK1.7中，这部分内容被称作NIO.2，主要在java.nio.channels包下 BIO、NIO、AIO适用场景分析 BIO方式适用于连接数目比较小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中，JDK1.4以前的唯一选择，但程序直观简单易理解。 NIO方式适用于连接数目多且连接比较短（轻操作）的架构，比如聊天服务器，并发局限于应用中，编程比较复杂，JDK1.4开始支持。 AIO方式使用于连接数目多且连接比较长（重操作）的架构，比如相册服务器，充分调用OS参与并发操作，编程比较复杂，JDK7开始支持。 参考文章http://blog.csdn.net/skiof007/article/details/52873421]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java-UML导图]]></title>
+    <url>%2F2017%2F09%2F24%2FJava-UML%E5%AF%BC%E5%9B%BE%2F</url>
+    <content type="text"><![CDATA[Java UML导图：]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[GitHub+Hexo+Next搭建个人博客笔记]]></title>
+    <url>%2F2017%2F09%2F23%2FGitHubPages%2F</url>
+    <content type="text"><![CDATA[Git步骤 通过Git bash进入要建仓库的文件夹 把当前的目录变成可以管理的git仓库，生成隐藏.git文件 1git init 指定用户名和邮箱 12git config --global user.name "gitName"git config --global user.email "gitEmail" 生成SHK 12345678910#先查看有没有生成过cd ~/.sshls#有就直接用#没有命令生成ssh-keygen -t rsa –C "gitEmail"#复制id_rsa.pub到Settings→SSH and GPG keys →New SSH key#测试命令ssh -T git@github.com Git常用命令 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586#把XX文件添加到暂存区去，XX写成 . ,表示提交当前目录下所有文件git add XX#提交XX文件git commit –m "注释" XX#查看仓库状态git status#查看XX文件修改了那些内容 git diff XX#查看历史记录 git log#查看历史记录的版本号id git reflog#回退到上一个版本 git reset --hard HEAD^ 或者 git reset --hard HEAD~#把XX文件在工作区的修改全部撤销git checkout -- XX#删除XX文件 git rm XX#创建+切换分支git checkout –b name#查看分支git branch#切换分支git checkout name #合并某分支到当前分支git merge name#删除分支git branch –d name#删除分支后保留分支信息git merge –no-ff -m "注释" name #删除远程分支git push origin :name#隐藏当前工作现场git stash#回复工作现场,恢复后，stash内容并不删除，需要使用命令 git stash drop 来删除git stash apply#另一种方式,恢复的同时把stash内容也删除了git stash pop#关联一个远程库gitUrl, origin是给远程仓库起的别名 git remote add origin gitUrl#把当前master分支推送到远程库git push –u(第一次要用-u 以后不需要) origin master#获取仓库最新代码git pull#查看远程仓库信息git remote –v#取消与远程仓库origin的关联git remote remove origin#推送到远程仓库， master可换位分支名，即推送分支git push origin master#强行覆盖远程仓库 git push -f origin master将本地分支name推送到远程，并在远程创建name分支 git push origin name:name#从远程库中克隆git clone gitUrl#把本地的分支推送到仓库，并在仓库创建对应的分支,name为分支名git branch --set-upstream name origin/name#在远程库中克隆分支到本地，并在本地创建对应分支，name为分支名git checkout –b name origin/name Hexo步骤 安装Hexo 1npm install -g hexo-cli 初始化Hexo 1hexo init 生成Hexo文件结构 1npm install 配置deploy（修改站点_config.yml中的deploy，修改完后执行） 1npm install hexo-deployer-git --save 插件安装 12345678#rss插件： npm install --save hexo-generator-feed#统计插件：npm install hexo-wordcount --save#本地搜索插件：npm install hexo-generator-searchdb --save Next主题扩展 站点统计：LeanCloud 第三方评论：来必力 图床：七牛云 软件下载 git下载地址：https://git-scm.com/download tortoiseGit下载地址：https://tortoisegit.org/download/ nodejs下载地址：https://nodejs.org/en/download/ 文档参考 HEXO：https://hexo.io/zh-cn/docs/ Next主题：http://theme-next.iissnan.com/getting-started.html Next个性化配置传送门 Sublime Text编辑MarkDowm参考传送门Sublime Text配置常用插件(Package Control 、OmniMarkupPreviewer、IMESupport、spacegray),配置snippet]]></content>
+      <categories>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java 反射]]></title>
+    <url>%2F2017%2F09%2F21%2FJava-%E5%8F%8D%E5%B0%84%2F</url>
+    <content type="text"><![CDATA[Java反射总结：]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[markdown常用语法笔记]]></title>
+    <url>%2F2017%2F09%2F21%2Fmarkdown%2F</url>
+    <content type="text"><![CDATA[标题1234# 一级标题## 二级标题…………###### 六级标题 粗体粗体1**粗体** 斜体斜体 1*斜体* 引用 引用 1&gt;引用 无序列表 a b 12* a* b 有序列表 a b 121. a2. b 直接连接http://baidu.com 1&lt;http://baidu.com&gt; 超链接百度 百度 1234[百度](http://baidu.com)[百度][baidu_url][baidu_url]:http://baidu.com 图片 1![test](http://mouapp.com/Mou_128.png) 表格 标题1 标题2 标题3 标题4 默认1 左对齐1 右对齐1 居中1 默认2 左对齐2 右对齐2 居中2 1234| 标题1 | 标题2 | 标题3 | 标题4 || ----- ---- | :--------- | ----------: | :------: || 默认1 | 左对齐1 | 右对齐1 | 居中1 || 默认2 | 左对齐2 | 右对齐2 | 居中2 | 参考文章http://www.appinn.com/markdown/#html]]></content>
+      <categories>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>markdown</tag>
+      </tags>
+  </entry>
+</search>
