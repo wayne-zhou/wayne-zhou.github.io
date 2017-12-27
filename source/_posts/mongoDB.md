@@ -107,15 +107,15 @@ db.movie.remove({key1:'value1'},1)
 ## 索引和排序
 ```Bash
 #key1加上升序索引,-1为降序
-db.movie.ensureIndex({key1:1})
+db.movie.ensureIndex({key1:1},{"background":true})
 #key1加上text索引，用于文本搜索
-db.movie.ensureIndex({key1:'text'})
+db.movie.ensureIndex({key1:'text'},{"background":true})
 #过滤文本中含有aaa的
 db.movie.find({$text:{$search:"aaa"}}).pretty()
 #返回movie的所有索引
 db.movie.getIndexes()
 #删除key1的索引
-db.movie.dropIndex('key1')
+db.movie.dropIndex('indexName')
 #按照key1升序，-1为降序
 db.movie.find().sort({'key1':1}).pretty()
 ```
@@ -123,7 +123,20 @@ db.movie.find().sort({'key1':1}).pretty()
 ## 聚合
 ```Bash
 #按照key1分组后求和key2。$avg、$first、$last、$max、$min
-db.movie.aggregate([{$group:{name1:'$key1',num2:{$sum:'$key2'}}}])
+db.movie.aggregate([{$group:{_id:'$key1',num2:{$sum:'$key2'}}}])
+db.movie.group
+#多项分组
+db.movie.aggregate([{$group:{_id:{key1:'$key1',key2:'$key2'},num2:{$sum:'$key2'}}}])
+#分组并加查询条件
+db.movie.group({
+    key:{key1:'$key1',key2:'$key2'},
+    initial:{count:0},
+    $reduce:function(doc,prev)
+    {
+        prev.count++
+    },
+    condition:{key1:{$gte:3}}
+});
 ```
 
 ## 正则表达式
